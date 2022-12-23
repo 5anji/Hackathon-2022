@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - include:
+      - file: create-cook.yml
+      - relativeToChangelogFile: true
+  - include:
+      - file: create-food.yml
+      - relativeToChangelogFile: true
