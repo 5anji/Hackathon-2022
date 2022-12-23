@@ -1,0 +1,307 @@
+openapi: 3.0.3
+
+info:
+  title: API for Hackathon website
+  contact:
+    email: gitlanm@gmail.com
+  license:
+    name: GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+  version: 1.0.0
+servers:
+  - url: http://192.168.9.147:8081/api
+externalDocs:
+  description: See our source code
+  url: https://github.com/5anji/PBMenu
+
+tags:
+  - name: Food
+    description: Operations about food
+  - name: Users
+    description: Operations about users
+paths:
+  /food:
+    get:
+      tags:
+        - Food
+      summary: Get array of food
+      operationId: getFood
+      parameters:
+        - in: query
+          name: pages
+          required: true
+          schema:
+            type: integer
+          description: The number of pages
+        - in: query
+          name: nrOfItems
+          required: true
+          schema:
+            type: integer
+          description: The numbers of items to return
+
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Food"
+        "400":
+          description: Invalid status value
+        "404":
+          description: Not found
+    post:
+      tags:
+        - Food
+      summary: Add food to DB
+      operationId: postFood
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - userId
+                - foodName
+                - foodPrice
+              properties:
+                userId:
+                  type: string
+                  format: uuid
+                  example: e762634c-3e41-11eb-b897-0862660ccbd4
+                foodName:
+                  type: string
+                  example: some_food
+                foodPhoto:
+                  type: string
+                foodPrice:
+                  type: number
+                  format: float
+      responses:
+        "201":
+          description: created object
+        "400":
+          description: Invalid status value
+  /food/{foodId}:
+    delete:
+      tags:
+        - Food
+      summary: Delete food from DB
+      operationId: deleteFoodID
+      parameters:
+        - in: path
+          name: foodId
+          description: ID of food to return
+          required: true
+          schema:
+            type: string
+            format: uuid
+
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid status value
+        "404":
+          description: Not found
+    get:
+      tags:
+        - Food
+      summary: Get a food
+      operationId: getFoodID
+      parameters:
+        - in: path
+          name: foodId
+          description: ID of food to return
+          required: true
+          schema:
+            type: string
+            format: uuid
+
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Food"
+        "400":
+          description: Invalid status value
+        "404":
+          description: Not found
+
+  /user/:
+    post:
+      tags:
+        - Users
+      summary: Add user to DB
+      operationId: postUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+                - userName
+                - userNumber
+              properties:
+                userName:
+                  type: string
+                  example: some_food
+                userPhoto:
+                  type: string
+                userNumber:
+                  type: string
+                  example: "+373790123456"
+                rating:
+                  type: integer
+                  minimum: 1
+                  maximum: 5
+      responses:
+        "201":
+          description: created object
+        "400":
+          description: Invalid status value
+  /user/{userId}:
+    delete:
+      tags:
+        - Users
+      summary: Delete user from DB
+      operationId: postUserById
+      parameters:
+        - in: path
+          name: userId
+          description: ID of the user
+          required: true
+          schema:
+            type: string
+            format: uuid
+
+      responses:
+        "200":
+          description: successful operation
+        "400":
+          description: Invalid status value
+        "404":
+          description: Not found
+    get:
+      tags:
+        - Users
+      summary: Get user from DB
+      operationId: getUserById
+      parameters:
+        - in: path
+          name: userId
+          description: ID of the user
+          required: true
+          schema:
+            type: string
+            format: uuid
+
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid status value
+        "404":
+          description: Not found
+  
+  /food/{userId}:
+    get:
+      tags:
+        - Food
+      summary: Get user from DB
+      operationId: getUserFoodById
+      parameters:
+        - in: path
+          name: userId
+          description: ID of the user
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - in: query
+          name: pages
+          required: true
+          schema:
+            type: integer
+          description: The number of pages
+        - in: query
+          name: nrOfItems
+          required: true
+          schema:
+            type: integer
+          description: The numbers of items to return
+
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Food"
+        "400":
+          description: Invalid status value
+        "404":
+          description: Not found
+components:
+  schemas:
+    Food:
+      type: object
+      required: 
+        - foodId
+        - userId
+        - foodName
+        - foodPrice
+      properties:
+        foodId:
+          type: string
+          format: uuid
+          example: e762634c-3e41-11eb-b897-0862660ccbd4
+        userId:
+          type: string
+          format: uuid
+          example: e762634c-3e41-11eb-b897-0862660ccbd4
+        foodName:
+          type: string
+          example: some_food
+        foodPhoto:
+          type: string
+        foodPrice:
+          type: number
+          format: float
+          example: 66.6
+    User:
+      type: object
+      required: 
+        - userId
+        - userName
+        - userNumber
+      properties:
+        userId:
+          type: string
+          format: uuid
+          example: e762634c-3e41-11eb-b897-0862660ccbd4
+        userName:
+          type: string
+          example: some_food
+        userPhoto:
+          type: string
+        userNumber:
+          type: string
+          example: "+373790123456"
+        rating:
+          type: integer
+          minimum: 1
+          maximum: 5
