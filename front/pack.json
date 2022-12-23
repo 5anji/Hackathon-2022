@@ -1,0 +1,16 @@
+[
+  {
+    "foodId": "e762634c-3e41-11eb-b897-0862660ccbd4",
+    "userId": "e762634c-3e41-11eb-b897-0862660ccbd4",
+    "foodName": "some_food",
+    "foodPhoto": "string",
+    "foodPrice": 66.6
+  },
+  {
+    "foodId": "e762634c-3e41-11eb-b897-0862660ccbd4",
+    "userId": "e762634c-3e41-11eb-b897-0862660ccbd4",
+    "foodName": "some_food",
+    "foodPhoto": "string",
+    "foodPrice": 66.6
+  }
+]
