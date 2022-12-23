@@ -162,6 +162,8 @@ paths:
                   type: integer
                   minimum: 1
                   maximum: 5
+                reservation:
+                  type: boolean
       responses:
         "201":
           description: created object
@@ -305,3 +307,6 @@ components:
           type: integer
           minimum: 1
           maximum: 5
+        reservation:
+          type: boolean
+
