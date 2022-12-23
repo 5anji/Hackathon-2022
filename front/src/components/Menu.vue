@@ -9,7 +9,7 @@ export default {
   <h1>Ca acasa la Doamna Zina</h1>
 
   <div class="menu">
-    <
+
   </div>
 </div>
 </template>
