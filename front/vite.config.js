@@ -9,7 +9,7 @@ export default defineConfig({
       '/api': {
         changeOrigin: true,
         secure: false,
-        target: 'http://192.168.253.208:8080',
+        target: 'http://192.168.43.246:8081',
         timeout: 6000,
       }
     }

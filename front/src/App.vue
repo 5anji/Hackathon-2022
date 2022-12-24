@@ -8,7 +8,7 @@ const x = ref(true);
 
 <template>
   <NavBar  />
-  <NavBarMobVue />
+
   <router-view v-slot="{ Component }">
     <transition name="fade">
       <component
