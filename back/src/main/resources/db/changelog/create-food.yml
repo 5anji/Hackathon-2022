@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-food
+      author: andrei.sarateanu
+      failOnError: true
+      changes:
+        - sql:
+            sql:  CREATE TABLE food_menu (
+              food_id UUID PRIMARY KEY,
+              food_name VARCHAR NOT NULL,
+              food_photo TEXT NOT NULL,
+              food_price INT NOT NULL,
+              cook_id UUID NOT NULL,
+              CONSTRAINT fk_cook
+              FOREIGN KEY(cook_id)
+              REFERENCES cook(cook_id)
+              );

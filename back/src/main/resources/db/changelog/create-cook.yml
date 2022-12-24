@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-cook
+      author: andrei.sarateanu
+      failOnError: true
+      changes:
+        - sql:
+            sql:  CREATE TABLE cook (
+              cook_id UUID PRIMARY KEY,
+              cook_name VARCHAR NOT NULL,
+              cook_photo TEXT NOT NULL,
+              phone_number VARCHAR NOT NULL,
+              rating INT NOT NULL
+              );
